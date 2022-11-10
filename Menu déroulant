@@ -1,0 +1,67 @@
+#include<Wire.h>
+#include<Adafruit_GFX.h>
+#include<Adafruit_SSD1306.h>
+int pot=A0;
+int deg;
+Adafruit_SSD1306 display(128,64,&Wire,-1);
+
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(pot, INPUT);
+if(!display.begin(SSD1306_SWITCHCAPVCC,0x3C))
+  {
+    Serial.println(F("bla"));
+    for(;;);
+  
+    
+    }
+
+
+    
+display.clearDisplay();
+display.setTextSize(2);
+display.setTextColor(WHITE);
+display.setCursor(0,10);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  display.clearDisplay();
+
+int reading = analogRead(pot);
+ display.setCursor(0,10);
+ 
+ Serial.println(reading);
+
+if(reading>0 && reading<=936)
+{
+ 
+display.print("heure");
+display.display();
+  
+}
+if(reading>936 && reading<=982)
+{
+
+display.print("graphique");
+display.display();
+  
+}
+if(reading>982 && reading<=1023)
+{
+ 
+display.println("memoire");
+display.display();
+  
+  
+}
+
+
+
+  
+
+}
